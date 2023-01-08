@@ -636,7 +636,7 @@ function genQueryFilter<DocumentFilter, KeysFilter extends keyof DocumentFilter>
   // Util. Local.
   //////////////////////////////////////////////////////////////////////////////
   function convWildcardStringToPostgreLikeOperand(str: string): string {
-    throw new Error(str)
+    throw new Error(typeof str)
     // @ts-ignore
     return str.replaceAll('_', '\_')
       .replaceAll('%', '\%')
