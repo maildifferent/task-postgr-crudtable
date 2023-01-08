@@ -103,7 +103,6 @@ export type UndoPartial<T> = T extends Partial<infer R> ? R : never
 }
 
 export function convWildcardStringToRegex(str: string): RegExp {
-  console.log(str)
   return new RegExp(
     '^' + str.replaceAll('.', '\.')
       .replaceAll('?', '.')
