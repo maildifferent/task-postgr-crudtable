@@ -13,7 +13,7 @@ export interface KbServerRequestI {
 }
 
 export const kbServer = {
-  url: 'https://task-postgr-crudtable.onrender.com:10000' as const,
+  url: 'https://task-postgr-crudtable.onrender.com' as const,
 
   createHeaders({ appOptions }: ApplicationOptions): HeadersInit {
     const headers: HeadersInit = { 'Content-Type': 'application/json' }
