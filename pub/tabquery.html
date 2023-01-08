@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    select,
+    input,
+    button {
+      font-size: 1rem;
+      height: 2rem;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
+      border: 1px solid rgb(221, 221, 221)
+    }
+
+    button,
+    input[type="submit"] {
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      background-color: #049fd9;
+
+      display: inline-flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button .icon {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: transparent;
+    }
+
+    /* 
+    ////////////////////////////////////////////////////////////////////////////
+    // Tabquery.
+    ////////////////////////////////////////////////////////////////////////////
+    */
+    div.tabquery_toolbar {
+      padding-left: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    /* 
+    ////////////////////////////////////////////////////////////////////////////
+    // Messagebox.
+    ////////////////////////////////////////////////////////////////////////////
+    */
+    div.messagebox_container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 470px;
+    }
+
+    div.messagebox {
+      position: relative;
+      background: rgba(219, 219, 219, 0.4);
+      padding: 0.5rem 1rem;
+      border-top: solid 2px rgb(221, 221, 221);
+    }
+
+    button.messagebox_removebtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      color: #d9534f;
+      background: transparent;
+    }
+
+    /* 
+    ////////////////////////////////////////////////////////////////////////////
+    // Filtersource.
+    ////////////////////////////////////////////////////////////////////////////
+    */
+    div.filtersource_container {
+      width: 100%;
+      background-color: #fff;
+      padding: 0.5rem;
+      border-top: solid 2px rgb(221, 221, 221);
+    }
+
+    div.filtersource_container h5 {
+      margin-top: 0px;
+    }
+
+    div.filtersource_container form {
+      margin-bottom: 1rem;
+      display: flex;
+    }
+
+    div.filtersource_filters,
+    div.filtersource_filters button {
+      height: 1.3rem;
+    }
+
+    div.filtersource_container select {
+      border-right: none;
+      border-bottom-left-radius: 1rem;
+      border-top-left-radius: 1rem;
+      overflow: hidden;
+    }
+
+    div.filtersource_container button,
+    div.filtersource_container input[type="submit"] {
+      border-radius: 1rem;
+    }
+
+    div.filtersource_container input[type="submit"] {
+      background-color: #049fd9;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    div.filtersource_container button:first-child {
+      background-color: #5cb85c;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    div.filtersource_container button:last-child {
+      background-color: #d9534f;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-right: 0.5rem;
+    }
+
+    /* 
+    ////////////////////////////////////////////////////////////////////////////
+    // Tabsource.
+    ////////////////////////////////////////////////////////////////////////////
+    */
+    div.tabsource_container {
+      width: 100%;
+      border-top: solid 2px rgb(221, 221, 221);
+    }
+
+    div.tabsource_toolbar {
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    table {
+      box-sizing: border-box;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    thead {
+      position: sticky;
+      background-color: rgba(219, 219, 219, 0.4);
+      box-shadow: 0 3px 5px rgba(221, 221, 221);
+    }
+
+    .tabsource_check {
+      background-color: rgba(219, 219, 219, 0.4);
+    }
+
+    thead>tr>td {
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    thead>tr>td>div,
+    tbody>tr>td,
+    tfoot>tr>td {
+      overflow: hidden;
+    }
+
+    td {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      border-right: 1px solid rgb(221, 221, 221);
+      border-bottom: 1px solid rgb(221, 221, 221);
+    }
+
+    .resizer {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      right: -3px;
+      width: 5px;
+      cursor: col-resize;
+      user-select: none;
+      background-color: rgb(221, 221, 221);
+    }
+
+    tbody:focus,
+    tr:focus,
+    td:focus {
+      outline: 3px solid black;
+    }
+
+    thead td:hover,
+    tbody tr:hover {
+      cursor: pointer;
+    }
+
+    tfoot>tr>td {
+      border: none;
+    }
+
+    tr>td:last-child {
+      border-right: none;
+    }
+
+    .editbox {
+      box-sizing: border-box;
+      font: inherit;
+      outline: none;
+      border: none;
+      margin: 0;
+      padding: 1px;
+      resize: none;
+      outline: none;
+      overflow: auto;
+    }
+
+    .editcel {
+      padding: 0;
+    }
+
+    .selected {
+      background-color: rgba(66, 133, 244, .1);
+    }
+
+    /* 
+    ////////////////////////////////////////////////////////////////////////////
+    // Other.
+    ////////////////////////////////////////////////////////////////////////////
+    */
+  </style>
+</head>
+
+<body>
+  <div style="border: solid black 1px; margin: 5px; padding: 5px;">
+    <b>Test scenario:</b><br>
+    - Press "Run report" button. <b>Result:</b> report is formed.<br>
+    - Press "Create" button. <b>Result:</b> empty line is created.<br>
+    - Enter some text into fields "Name", "Position", "Skills", "Comment" of the new empty line. Press "Commit" button.
+    <b>Result:</b> new line is saved into database.<br>
+    - Double click on cell "Name" in the created line. Change name. Press Enter. Press "Commit" button.
+    <b>Result:</b> changes are saved into database.<br>
+    - Select created line by pressing "_check" cell. Press "Delete" button. Press "Commit" button.
+    <b>Result:</b> selected line is deleted from database.<br>
+    - Select "name" option in the "Filter" section. Write *a* in the filter textbox. 
+    Press button "Set filter". Press button "Run report".
+    <b>Result:</b> filter is set. Report is formed respecting corresponding filter.<br>
+    - Using mouse select some cells area. Press Ctrl + C.
+    <b>Result:</b> data is copied. You can paste it for example in Excel.<br>
+    - Also it is possible to paste data into cells using Ctrl + V keys.
+  </div>
+</body>
+
+<script type="module">
+  import '/lib/share/tabquery_tabrep_front_test.js'
+  // import '/lib/share/tabquery_tabrep_front.js'
+</script>
+
+</html>
